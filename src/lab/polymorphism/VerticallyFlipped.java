@@ -9,8 +9,6 @@ public class VerticallyFlipped implements TextBlock {
 
     public VerticallyFlipped(TextBlock txt){
 
-       int height = this.height();
-
        TextLine string1 = new TextLine(txt.textline());
         this.contents =  string1; //it's the same flipped, as it is normally
 
