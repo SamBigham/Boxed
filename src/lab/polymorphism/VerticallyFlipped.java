@@ -4,14 +4,11 @@ package lab.polymorphism;
 public class VerticallyFlipped implements TextBlock {
 
     TextBlock contents;
-
     TextBlock txt;
 
     public VerticallyFlipped(TextBlock txt){
-
        TextLine string1 = new TextLine(txt.textline());
         this.contents =  string1; //it's the same flipped, as it is normally
-
     }
 
     // code for running TextBlock
