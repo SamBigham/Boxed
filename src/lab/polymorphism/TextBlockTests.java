@@ -59,3 +59,10 @@ public class TextBlockTests {
         VerticallyFlipped vertflip = new VerticallyFlipped(block);
         assertEquals("Vertical Flip", vertflip.width(), 6);
     }
+             @Test
+        public void test9(){
+        TextBlock block1 = new TextLine("test");
+        TextBlock block2 = new TextLine("test");
+        assertEquals("equal", true, TBUtils.equal(block1, block2));
+    }
+}
