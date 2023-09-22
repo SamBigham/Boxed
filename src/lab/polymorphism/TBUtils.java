@@ -71,7 +71,7 @@ public class TBUtils {
     return lotsOfSpaces.substring(0, len);
   } // spaces(int)
 
-  public boolean equal(TextBlock t1, TextBlock t2) {
+  public static boolean equal(TextBlock t1, TextBlock t2) {
 
     if (t1.textline().equals(t2.textline())) {
       return true;
@@ -81,7 +81,7 @@ public class TBUtils {
 
   }
 
-  public boolean eqv(TextBlock t1, TextBlock t2) {
+  public static boolean eqv(TextBlock t1, TextBlock t2) {
     if (t1.type().equals(t2.type())) {
       return true;
     } else {
@@ -89,7 +89,7 @@ public class TBUtils {
     }
   }
 
-  public boolean eq(TextBlock t1, TextBlock t2) {
+  public static boolean eq(TextBlock t1, TextBlock t2) {
     return (t1 == t2);
   }
 
