@@ -1,5 +1,10 @@
-lab-polymorphism-2019
+lab-polymorphism-2023
 =====================
+Author Sam Bigham
+
+Parts of this code was taken from a lab whose original author was Sam Rebelsky
+
+This lab is about Boxed blocks and truncating them, and doing other commands with them.
 
 A lab on polymorphism, based on an old lab from _The Tao of Java_, itself
 based on an even older lab from _Espresso_.  Old labs never die; they just
