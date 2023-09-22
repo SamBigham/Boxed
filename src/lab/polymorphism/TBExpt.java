@@ -33,25 +33,15 @@ public class TBExpt {
     Centered cent = new Centered(block, 10);
     RightJustified rjust = new RightJustified(rightblock, 40);
     NewBlock mult = new NewBlock(block, 4);
-
-
-    
     HorizontallyFlipped horfli = new HorizontallyFlipped(tb);
-
+    VerticallyFlipped vertflip = new VerticallyFlipped(block);
 
     TBUtils.print(pen, trun);
     TBUtils.print(pen, cent);
     TBUtils.print(pen, rjust);
     TBUtils.print(pen, mult);
     TBUtils.print(pen, horfli);
-
-    // TBUtils.print(pen,trun);
-    // TBUtils.print(pen,blk);
-    // TBUtils.print(pen,em);
-    // TBUtils.print(pen,tb);
-    // TBUtils.print(pen,trun.truncate(tb, 10));
-    // Print out the block
-    // TBUtils.print(pen, block);
+    TBUtils.print(pen, vertflip);
 
     // Clean up after ourselves.
     pen.close();
