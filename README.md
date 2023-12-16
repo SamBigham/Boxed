@@ -1,7 +1,9 @@
 lab-polymorphism-2023
 =====================
 #**Important**
-In order to run the code, you need to open it up from the src directory on VScode and add the jUnit testing library to the classpath. Otherwise, VScode will not be able to recoqnize the Junit imports.
+
+
+**In order to run the code, you need to open it up from the src directory on VScode and add the jUnit testing library to the classpath. Otherwise, VScode will not be able to recoqnize the Junit imports.**
 
 
 Author Sam Bigham
