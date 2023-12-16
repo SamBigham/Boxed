@@ -1,6 +1,7 @@
 package lab.polymorphism;
 
 import static org.junit.Assert.assertEquals;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import java.io.PrintWriter;
@@ -23,6 +24,7 @@ public class TextBlockTests {
     }
 
     @Test
+
     public void test2() {
         TextBlock truncblock = new TextLine("We're truncating");
         Truncated trun = new Truncated(truncblock, 3);
@@ -37,6 +39,7 @@ public class TextBlockTests {
     }
 
     @Test
+
     public void test4() {
         TextBlock block = new TextLine("test");
         Centered cent = new Centered(block, 10);
@@ -76,6 +79,7 @@ public class TextBlockTests {
 
     @Test
     public void test9() {
+
         TextBlock block1 = new TextLine("test");
         TextBlock block2 = new TextLine("test");
         assertEquals("equal", true, TBUtils.equal(block1, block2));

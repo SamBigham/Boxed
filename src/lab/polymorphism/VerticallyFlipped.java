@@ -10,6 +10,7 @@ public class VerticallyFlipped implements TextBlock {
 
     public VerticallyFlipped(TextBlock txt) {
         this.txt = txt;
+
     }
 
     /**
