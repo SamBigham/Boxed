@@ -1,56 +1,63 @@
 package lab.polymorphism;
 
-
+/**
+ * @author Sam Bigham
+ *         veritcallyFlips textblocks
+ */
 public class VerticallyFlipped implements TextBlock {
-
-    TextBlock contents;
 
     TextBlock txt;
 
-    public VerticallyFlipped(TextBlock txt){
-
-       int height = this.height();
-
-       TextLine string1 = new TextLine(txt.textline());
-        this.contents =  string1; //it's the same flipped, as it is normally
-
+    public VerticallyFlipped(TextBlock txt) {
+        this.txt = txt;
     }
 
-    // code for running TextBlock
+    /**
+     * Get one row from the block.
+     * 
+     * @pre 0 <= i < this.height()
+     * @exception Exception if the precondition is not met
+     */
     public String row(int i) throws Exception {
-        int h = this.contents.height();
-        // The top and bottom of the box
-        if ((i == 0) || (i == h + 1)) {
-            return "+" + TBUtils.dashes(this.contents.width()) + "+";
-        }
-        // Stuff within the box
-        else if ((i > 0) && (i <= h)) {
-            return "|" + this.contents.row(i - 1) + "|";
-        }
-        // Everything else
-        else {
+        int lh = this.txt.height();
+
+        // Sanity check
+        if ((i < 0) || (i >= lh)) {
             throw new Exception("Invalid row " + i);
+        } // if the row is invalid
+
+        String result;
+        if (i < lh) {
+            result = this.txt.row(this.txt.height() - i - 1);
+        } else {
+            result = TBUtils.spaces(this.txt.width());
         }
+
+        return result;
     } // row(int)
 
     /**
      * Determine how many rows are in the block.
      */
     public int height() {
-        return 2 + this.contents.height();
+        // The height is the sum of the heights of the top and bottom
+        // blocks.
+        return this.txt.height();
     } // height()
 
     /**
      * Determine how many columns are in the block.
      */
     public int width() {
-        return 2 + this.contents.width();
+        return this.txt.width();
     } // width()
 
     public String textline() {
-        return this.contents.textline();
+        return this.txt.textline();
     }
-    public String type(){
-        return "Vertflipped";
-      }
+
+    public String type() {
+        return "VerticallyFlipped";
+    }
+
 }

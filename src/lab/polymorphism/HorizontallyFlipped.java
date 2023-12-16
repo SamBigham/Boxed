@@ -1,62 +1,73 @@
 package lab.polymorphism;
 
+/**
+ * @author Sam Bigham
+ *         horizontally flips textblocks
+ */
 public class HorizontallyFlipped implements TextBlock {
-    TextBlock contents;
 
     TextBlock txt;
 
     public HorizontallyFlipped(TextBlock txt) {
-        String string1 = txt.textline();
-        char[] chararr = string1.toCharArray();
-
-        char[] flippedarr = new char[string1.length()];
-
-        for (int i = 0; i < string1.length(); i++) {
-            flippedarr[i] = chararr[string1.length() - 1 - i];
-        }
-
-        String flip = new String(flippedarr);
-
-        TextLine flipped = new TextLine(flip);
-        this.contents = flipped;
-
+        this.txt = txt;
     }
 
-    // code for running TextBlock
+    /**
+     * Get one row from the block.
+     * 
+     * @pre 0 <= i < this.height()
+     * @exception Exception if the precondition is not met
+     */
     public String row(int i) throws Exception {
-        int h = this.contents.height();
-        // The top and bottom of the box
-        if ((i == 0) || (i == h + 1)) {
-            return "+" + TBUtils.dashes(this.contents.width()) + "+";
-        }
-        // Stuff within the box
-        else if ((i > 0) && (i <= h)) {
-            return "|" + this.contents.row(i - 1) + "|";
-        }
-        // Everything else
-        else {
+        int lh = this.txt.height();
+
+        // Sanity check
+        if ((i < 0) || (i >= lh)) {
             throw new Exception("Invalid row " + i);
+        } // if the row is invalid
+
+        String result;
+        if (i < lh) {
+
+            char ch;
+            String reverStr = "";
+
+            for (int j = 0; j < this.txt.row(i).length(); j++) {
+                ch = this.txt.row(i).charAt(j); // extracts each character
+                reverStr = ch + reverStr; // adds each character in front of the existing string
+            }
+
+            result = reverStr;
+        } else {
+            result = TBUtils.spaces(this.txt.width());
         }
+
+        return result;
     } // row(int)
 
     /**
      * Determine how many rows are in the block.
      */
     public int height() {
-        return 2 + this.contents.height();
+        // The height is the sum of the heights of the top and bottom
+        // blocks.
+        return this.txt.height();
     } // height()
 
     /**
      * Determine how many columns are in the block.
      */
     public int width() {
-        return 2 + this.contents.width();
+        // The width is the greater of the widths of the top and bottom
+        // blocks.
+        return this.txt.width();
     } // width()
 
     public String textline() {
-        return this.contents.textline();
+        return this.txt.textline();
     }
+
     public String type() {
-        return "HoriFlip";
-      }
+        return "HorizontallyFlipped";
+    }
 }

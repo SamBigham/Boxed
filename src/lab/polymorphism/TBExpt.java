@@ -6,6 +6,7 @@ import java.io.PrintWriter;
  * A series of experiments with the text block layout classes.
  * 
  * @author Samuel A. Rebelsky
+ * @author Sam Bigham
  * @version 1.3 of September 2019
  */
 public class TBExpt {
@@ -20,38 +21,43 @@ public class TBExpt {
     // Create a block to use
     // TextBlock block = new TextLine("Hello");
 
-    TextBlock block = new TextLine("test");
-    TextBlock truncblock = new TextLine("We're truncating");
-    TextBlock rightblock = new TextLine("Right");
-    TextBlock empt = new TextLine("          ");
+    TextBlock block = new TextLine("hello");
+    TextBlock truncblock = new TextLine("Goodbye!");
+    TextBlock test = new TextLine("test");
+    BoxedBlock tes = new BoxedBlock(test);
 
-    BoxedBlock blk = new BoxedBlock(block);
-    BoxedBlock em = new BoxedBlock(empt);
-    TextBlock tb = new BoxedBlock(new BoxedBlock(new TextLine("Hello there")));
+    BoxedBlock bblock = new BoxedBlock(truncblock);
+    BoxedBlock bblock2 = new BoxedBlock(block);
+    VComposition vcomp = new VComposition(bblock2, truncblock);
 
-    Truncated trun = new Truncated(truncblock, 3);
-    Centered cent = new Centered(block, 10);
-    RightJustified rjust = new RightJustified(rightblock, 40);
-    NewBlock mult = new NewBlock(block, 4);
+    BoxedBlock b = new BoxedBlock(block);
 
+    Truncated trun = new Truncated(bblock, 8);
+    Centered cent = new Centered(bblock, 17);
+    RightJustified rj = new RightJustified(bblock, 17);
+    HorizontallyFlipped hf = new HorizontallyFlipped(bblock);
+    NewBlock nb = new NewBlock(bblock, 1);
+    NewBlock nbt = new NewBlock(tes, 2);
 
-    
-    HorizontallyFlipped horfli = new HorizontallyFlipped(tb);
+    VerticallyFlipped vf = new VerticallyFlipped(vcomp);
 
+    HorizontallyFlipped horflip = new HorizontallyFlipped(block);
 
     TBUtils.print(pen, trun);
     TBUtils.print(pen, cent);
-    TBUtils.print(pen, rjust);
-    TBUtils.print(pen, mult);
-    TBUtils.print(pen, horfli);
+    TBUtils.print(pen, rj);
+    TBUtils.print(pen, hf);
+    TBUtils.print(pen, vcomp);
+    TBUtils.print(pen, vf);
+    TBUtils.print(pen, nb);
+    TBUtils.print(pen, nbt);
+    TBUtils.print(pen, horflip);
 
-    // TBUtils.print(pen,trun);
-    // TBUtils.print(pen,blk);
-    // TBUtils.print(pen,em);
-    // TBUtils.print(pen,tb);
-    // TBUtils.print(pen,trun.truncate(tb, 10));
-    // Print out the block
-    // TBUtils.print(pen, block);
+    System.out.println("nb width is : " + nb.width());
+    System.out.println("nbt width is : " + nbt.width());
+    System.out.println("VF width is :" + vf.width());
+    System.out.println("hf width is : " + hf.width());
+    System.out.println("horflip width is : " + horflip.width());
 
     // Clean up after ourselves.
     pen.close();

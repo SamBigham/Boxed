@@ -1,10 +1,16 @@
 package lab.polymorphism;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.lang.Math;
 
+/**
+ * @author Sam Bigham
+ *         Centers textblocks
+ */
 public class Centered implements TextBlock {
 
-    TextBlock contents;
+    int width;
 
     TextBlock txt;
 
@@ -15,55 +21,64 @@ public class Centered implements TextBlock {
     // the string is in the middle of the textblock
     // and the text block has width equal to the width given
     public Centered(TextBlock txt, int widt) {
-        if ((widt - 2) < txt.textline().length()) {// checking if width is less than two plus the length of the string
-            TextBlock errorB = new TextLine("Error");
-            this.contents = errorB; // sets this equal to error block
+        this.txt = txt;
+        if (widt >= this.txt.width()) {
+            this.width = widt;
         } else {
-            // emptybeg empty space for beginning of string.
-            String emptybeg = " ".repeat((int) Math.ceil(((double) widt - (txt.textline().length() + 2)) / 2));
-            String emptyend = " ".repeat((int) Math.floor(((double) widt - (txt.textline().length() + 2)) / 2));
-            // emptyend creates empty space for end of string
-            TextLine string1 = new TextLine(emptybeg.concat(txt.textline().concat(emptyend)));
-            // creates a textline where the text is in the middle surrounded by whitespace
-            this.contents = string1; // sets contents equal to string
+            this.width = this.txt.width();
         }
+
     }
 
-    // code for running TextBlock
     public String row(int i) throws Exception {
-        int h = this.contents.height();
-        // The top and bottom of the box
-        if ((i == 0) || (i == h + 1)) {
-            return "+" + TBUtils.dashes(this.contents.width()) + "+";
+        // Gather some basic information
+        int th = this.txt.height();
+        int h = th;
+
+        int k = (((this.width) - this.txt.width()) / 2);
+        if (this.width <= this.txt.width()) {
+            k = 0;
         }
-        // Stuff within the box
-        else if ((i > 0) && (i <= h)) {
-            return "|" + this.contents.row(i - 1) + "|";
+        char[] padding = new char[k];
+        for (int j = 0; j < k; j++) {
+            padding[j] = ' ';
         }
-        // Everything else
-        else {
+
+        String padtop = new String(padding);
+
+        if ((i < 0) || (i >= h)) {
             throw new Exception("Invalid row " + i);
-        }
+        } else if (i < th) {
+            return padtop + this.txt.row(i);
+        } else {
+            return padtop + this.txt.row(i - th);
+        } // if the row is in the bottom half
     } // row(int)
 
     /**
      * Determine how many rows are in the block.
      */
     public int height() {
-        return 2 + this.contents.height();
+        // The height is the sum of the heights of the top and bottom
+        // blocks.
+        return this.txt.height();
     } // height()
 
     /**
      * Determine how many columns are in the block.
      */
     public int width() {
-        return 2 + this.contents.width();
+        // The width is the greater of the widths of the top and bottom
+        // blocks.
+        return this.width;
     } // width()
 
     public String textline() {
-        return this.contents.textline();
+        return this.txt.textline();
     }
+
     public String type() {
         return "Centered";
-      }
+    }
+
 }

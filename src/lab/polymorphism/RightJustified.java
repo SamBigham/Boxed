@@ -1,58 +1,84 @@
 package lab.polymorphism;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.lang.Math;
+
+/**
+ * @author Sam Bigham
+ *         RightJustifies textblocks
+ */
 public class RightJustified implements TextBlock {
-   
-    TextBlock contents;
+
+    int width;
 
     TextBlock txt;
 
-    public RightJustified(TextBlock txt, int widt){
-        if ((widt - 2) < txt.textline().length()) {
-            TextBlock errorB = new TextLine("Error");
-            this.contents = errorB;
-        } else{
-           String emptybeg = " ".repeat(widt - (txt.textline().length() + 2));
-        TextLine string1 = new TextLine(emptybeg.concat(txt.textline()));
+    // pre: textblock
+    // pre: width, where width is bigger than or equal to the string inside plus 2
+    // post: textblock, where textblock has a string in the middle
+    // this program takes in a textblock and a width, and creates a textblock where
+    // the string is in the middle of the textblock
+    // and the text block has width equal to the width given
+    public RightJustified(TextBlock txt, int widt) {
+        this.txt = txt;
+        if (widt >= this.txt.width()) {
+            this.width = widt;
+        } else {
+            this.width = this.txt.width();
+        }
 
-        this.contents = string1;
-    }
     }
 
     public String row(int i) throws Exception {
-        int h = this.contents.height();
-        // The top and bottom of the box
-        if ((i == 0) || (i == h + 1)) {
-          return "+" + TBUtils.dashes(this.contents.width()) + "+";
-        }
-        // Stuff within the box
-        else if ((i > 0) && (i <= h)) {
-          return "|" + this.contents.row(i - 1) + "|";
-        }
-        // Everything else
-        else {
-          throw new Exception("Invalid row " + i);
-        }
-      } // row(int)
-    
-      /**
-       * Determine how many rows are in the block.
-       */
-      public int height() {
-        return 2 + this.contents.height();
-      } // height()
-    
-      /**
-       * Determine how many columns are in the block.
-       */
-      public int width() {
-        return 2 + this.contents.width();
-      } // width()
-    
-      public String textline() {
-        return this.contents.textline();
-      }
-      public String type() {
-        return "RightJust";
-      }
-}
+        // Gather some basic information
+        int th = this.txt.height();
+        int h = th;
 
+        int k = this.width - this.txt.width();
+        if (this.width <= this.txt.width()) {
+            k = 0;
+        }
+        char[] padding = new char[k];
+        for (int j = 0; j < k; j++) {
+            padding[j] = ' ';
+        }
+
+        String padtop = new String(padding);
+
+        if ((i < 0) || (i >= h)) {
+            throw new Exception("Invalid row " + i);
+        } else if (i < th) {
+            return padtop + this.txt.row(i);
+        } else {
+            return padtop + this.txt.row(i - th);
+        } // if the row is in the bottom half
+    } // row(int)
+
+    /**
+     * Determine how many rows are in the block.
+     */
+    public int height() {
+        // The height is the sum of the heights of the top and bottom
+        // blocks.
+        return this.txt.height();
+    } // height()
+
+    /**
+     * Determine how many columns are in the block.
+     */
+    public int width() {
+        // The width is the greater of the widths of the top and bottom
+        // blocks.
+        return this.width;
+    } // width()
+
+    public String textline() {
+        return this.txt.textline();
+    }
+
+    public String type() {
+        return "RightJustified";
+    }
+
+}

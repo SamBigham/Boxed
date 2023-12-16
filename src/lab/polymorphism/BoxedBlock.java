@@ -4,6 +4,7 @@ package lab.polymorphism;
  * A text block surrounded by a box.
  *
  * @author Samuel A. Rebelsky
+ * @author Sam Bigham
  * @version 1.2 of February 2019
  */
 public class BoxedBlock implements TextBlock {
@@ -70,7 +71,8 @@ public class BoxedBlock implements TextBlock {
   public String textline() {
     return this.contents.textline();
   }
-    public String type() {
+
+  public String type() {
     return "Boxed";
   }
 

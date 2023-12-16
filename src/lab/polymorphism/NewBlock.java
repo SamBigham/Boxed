@@ -1,70 +1,75 @@
 package lab.polymorphism;
 
+/**
+ * @author Sam Bigham
+ *         my own new textblock
+ */
 public class NewBlock implements TextBlock {
 
-    TextBlock contents;
+    int n;
 
     TextBlock txt;
 
     // pre: textblock
-    // pre: n, where n is the number of Boxes surround the text. N > 0
-    // post: a boxed block where there are n amount of boxes
-    // creates a new textblock which is surrounded n times
+    // pre: n, where n is an integer greater than or equal to 0
+    // post: a new textblock with the edges cut off n times. Similar to truncate but
+    // on both sides and starts doing its job when n is greater than 0
     public NewBlock(TextBlock txt, int n) {
-        TextLine lin = new TextLine(txt.textline());
-        if (n <= 1) {
-            this.contents = lin; // there will only be one box
+        this.txt = txt;
+        if (n < 0) {
+            this.n = 0;
         } else {
-            BoxedBlock multiblk = new BoxedBlock(lin); // there will be two boxes
-            if (n > 2) {
-                for (int i = 2; i < n; i++) {
-                    multiblk = new BoxedBlock(multiblk); // there will be n amount of boxes
-                }
-            }
-            this.contents = multiblk; // sets contents equal to n amount of boxes
+            this.n = n;
         }
-        // for (int i = 0; i < n; i++){
-        // multiblk = new BoxedBlock(multiblk);
-
-        // }
-
     }
 
-    // code for running TextBlock
+    /**
+     * Get one row from the block.
+     * 
+     * @pre 0 <= i < this.height()
+     * @exception Exception if the precondition is not met
+     */
     public String row(int i) throws Exception {
-        int h = this.contents.height();
-        // The top and bottom of the box
-        if ((i == 0) || (i == h + 1)) {
-            return "+" + TBUtils.dashes(this.contents.width()) + "+";
-        }
-        // Stuff within the box
-        else if ((i > 0) && (i <= h)) {
-            return "|" + this.contents.row(i - 1) + "|";
-        }
-        // Everything else
-        else {
+        int lh = this.txt.height();
+
+        // Sanity check
+        if ((i < 0) || (i >= lh)) {
             throw new Exception("Invalid row " + i);
+        } // if the row is invalid
+
+        String result;
+        if (i < lh) {
+            result = this.txt.row(i).substring(n, this.txt.width() - n);
+        } else {
+            result = TBUtils.spaces(this.txt.width());
         }
+
+        return result;
     } // row(int)
 
     /**
      * Determine how many rows are in the block.
      */
     public int height() {
-        return 2 + this.contents.height();
+        // The height is the sum of the heights of the top and bottom
+        // blocks.
+        return this.txt.height();
     } // height()
 
     /**
      * Determine how many columns are in the block.
      */
     public int width() {
-        return 2 + this.contents.width();
+        // The width is the greater of the widths of the top and bottom
+        // blocks.
+        return this.txt.width() - (2 * n);
     } // width()
 
     public String textline() {
-        return this.contents.textline();
+        return this.txt.textline();
     }
+
     public String type() {
         return "NewBlock";
-      }
+    }
 }

@@ -4,6 +4,7 @@ package lab.polymorphism;
  * One line of text.
  * 
  * @author Samuel A. Rebelsky
+ * @author Sam Bigham
  * @version 1.3 of February 2019
  */
 public class TextLine implements TextBlock {
@@ -58,11 +59,11 @@ public class TextLine implements TextBlock {
     return this.line.length();
   } // width()
 
-  public String textline(){
+  public String textline() {
     return this.line;
   }
 
-  public String type(){
+  public String type() {
     return "TextLine";
   }
 

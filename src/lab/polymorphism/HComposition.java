@@ -4,6 +4,7 @@ package lab.polymorphism;
  * The horizontal composition of two text blocks.
  * 
  * @author Samuel A. Rebelsky
+ * @author Sam Bigham
  * @version 1.3 of February 2019
  */
 public class HComposition implements TextBlock {
@@ -86,9 +87,10 @@ public class HComposition implements TextBlock {
     return this.left.width() + this.right.width();
   } // width()
 
-  public String textline(){
+  public String textline() {
     return this.left.textline();
   }
+
   public String type() {
     return "HComp";
   }

@@ -4,6 +4,7 @@ package lab.polymorphism;
  * Simple blocks of text for a lab on polymorphism
  * 
  * @author Samuel A. Rebelsky
+ * @author Sam Bigham
  * @version 1.2 of February 2019
  */
 public interface TextBlock {
@@ -11,7 +12,7 @@ public interface TextBlock {
   // | Methods |
   // +---------+
 
-  //public int textln();
+  // public int textln();
   /**
    * Get one row from the block.
    * 

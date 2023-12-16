@@ -4,6 +4,7 @@ package lab.polymorphism;
  * The vertical composition of two text blocks.
  * 
  * @author Samuel A. Rebelsky
+ * @author Sam Bigham
  * @version 1.2 of February 2019
  */
 public class VComposition implements TextBlock {
@@ -87,10 +88,11 @@ public class VComposition implements TextBlock {
     return Math.max(this.top.width(), this.bottom.width());
   } // width()
 
-  public String textline(){
+  public String textline() {
     return this.top.textline();
   }
-  public String type(){
+
+  public String type() {
     return "VComp";
   }
 
